@@ -213,6 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
         await wait(1500);
 
         if (whiteOverlay) whiteOverlay.classList.add('active');
+
+        // Wait for fade to white, then redirect
+        await wait(1500);
+        window.location.href = 'https://sites.google.com/view/sokrai';
     };
 
     window.addEventListener('click', () => {
