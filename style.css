@@ -114,9 +114,9 @@ body.door-open {
 }
 
 .word-connector {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     /* Half size */
-    font-weight: 400;
+    font-weight: 600;
     color: var(--text-primary);
     opacity: 0;
     display: inline-block;
@@ -126,6 +126,16 @@ body.door-open {
     letter-spacing: 0.05rem;
     /* Absolute compression */
     transition: font-size 1.5s ease, opacity 1s ease, filter 1s ease;
+}
+
+.word-connector .wave {
+    color: var(--text-primary);
+    font-size: 2.5em;
+    text-shadow:
+        0 0 10px var(--accent-1),
+        0 0 20px var(--accent-1),
+        0 0 30px var(--accent-1),
+        0 0 40px var(--accent-1);
 }
 
 .typing-cursor {
