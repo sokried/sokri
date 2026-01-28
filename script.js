@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (connector) {
             // Connector (and) is horizontally aligned with I
-            const iY = (cy + activeVerticalGap) - 7; // Scaled offset
+            const iY = (cy + activeVerticalGap) - 6; // Scaled offset
             connector.style.transform = 'translate(0, -50%)';
             connector.style.top = `${iY}px`;
-            connector.style.left = `${targetX - 25}px`; // Scaled offset
+            connector.style.left = `${targetX - 35}px`; // Scaled offset
             connector.style.fontSize = '1.05rem'; // 1.5rem -> 1.05rem
         }
 
@@ -105,11 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await typeChars(s.querySelector('.expansion'), "chool", typeSpeed);
         if (isSkipped) return;
+        await wait(200);
+
 
         await typeChars(o.querySelector('.expansion'), "f", typeSpeed);
         if (isSkipped) return;
 
-        await wait(500);
+        await wait(300);
 
         await typeChars(k.querySelector('.expansion'), "nowledge,", typeSpeed);
         if (isSkipped) return;
@@ -117,22 +119,25 @@ document.addEventListener('DOMContentLoaded', () => {
         await typeChars(r.querySelector('.expansion'), "eason,", typeSpeed);
         if (isSkipped) return;
 
-        // coordinated "and" pushing "I" with skew trigger on 'd'
+        // coordinated "And" pushing "I" with skew trigger on 'd'
         if (connector) {
             connector.style.opacity = '1';
-            const finalMove = 10; // Scaled move
-
-            await typeChars(connector, "and", typeSpeed, (charIndex) => {
-                if (charIndex === 2) { // "d"
-                    // "and가 생기고 I가 이탤릭체가 될 때 and문자열이 전체가 왼쪽으로... 반동으로 튕기듯이"
+            const finalMove = 30; // Scaled move
+            await typeChars(connector, "And", typeSpeed, (charIndex) => {
+                connector.innerHTML = '<span class="wave">A</span>nd';
+                if (charIndex === 1) { // "n"
+                    // "And가 생기고 I가 이탤릭체가 될 때 And문자열이 전체가 왼쪽으로... 반동으로 튕기듯이"
                     i.querySelector('.letter').style.transform = 'skewX(-15deg)';
                     i.style.left = `${targetX + finalMove}px`;
 
                     // Recoil Bounce (Slower)
-                    connector.style.transition = 'left 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
-                    connector.style.left = `${targetX - 35}px`; // Scaled recoil
+                    connector.style.transition = 'left 0.1s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+                    connector.style.left = `${targetX - 25}px`; // Scaled recoil
                 }
             });
+
+            // Wrap "A" with wave class after typing is complete
+
         }
         if (isSkipped) return;
 
@@ -187,6 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (connector) {
             connector.style.filter = "brightness(2.5)";
             connector.style.transition = "filter 1s ease";
+
+            // Specifically brighten the "A" even more
+            const aLetter = connector.querySelector('.wave');
+            if (aLetter) {
+                aLetter.style.filter = "brightness(3) drop-shadow(0 0 20px #fff)";
+                aLetter.style.transition = "filter 1s ease";
+            }
         }
 
         if (subtitle) {
@@ -212,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sequenceFinished = true;
 
             const activeVerticalGap = 70;
-            const finalIMove = 10;
+            const finalIMove = 30;
             // Force Vertical Positions (Anchored at R)
             wrappers.forEach((el, index) => {
                 const stepsFromR = index - 3;
@@ -243,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (el.id == 'L-I') {
                     exp.textContent = 'nquiry';
                     letter.style.transform = 'skewX(-15deg)';
+                    letter.style.left = `${targetX + 50}px`;
                 } else {
                     letter.style.transform = 'none';
                 }
@@ -253,10 +266,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 connector.style.transition = 'none';
                 connector.style.transform = 'translate(0, -50%)';
                 connector.style.top = `${iY}px`;
-                connector.style.left = `${targetX - 35}px`; // Recoil position
+                connector.style.left = `${targetX - 25}px`; // Recoil position
                 connector.style.opacity = '1';
                 connector.style.fontSize = '1.05rem';
-                connector.textContent = "and";
+                connector.innerHTML = '<span class="wave" style="animation-delay: 0s">A</span>nd';
                 connector.classList.remove('typing-cursor');
             }
 
